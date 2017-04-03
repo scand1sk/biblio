@@ -8,6 +8,11 @@ import java.util.Optional;
  * 
  */
 public class Emprunt {
+	private final LocalDate dateEmprunt;
+	private Optional<LocalDate> dateRetour;
+
+	private final Lecteur lecteur;
+	private final Ouvrage ouvrage;
 
 	/**
 	 * Construit un emprunt
@@ -17,8 +22,10 @@ public class Emprunt {
 	 * @param ouvrage
 	 */
 	public Emprunt(LocalDate dateEmprunt, Lecteur lecteur, Ouvrage ouvrage) {
-		// TODO
-		throw new NotImplementedError();
+		this.dateEmprunt = dateEmprunt;
+		this.dateRetour = Optional.empty();
+		this.lecteur = lecteur;
+		this.ouvrage = ouvrage;
 	}
 
 	/**
@@ -28,8 +35,7 @@ public class Emprunt {
 	 * @param ouvrage
 	 */
 	public Emprunt(Lecteur lecteur, Ouvrage ouvrage) {
-		// TODO
-		throw new NotImplementedError();
+		this(LocalDate.now(), lecteur, ouvrage);
 	}
 
 	/**
@@ -37,17 +43,15 @@ public class Emprunt {
 	 * @return la date de l'emprunt
 	 */
 	public LocalDate getDateEmprunt() {
-		// TODO
-		throw new NotImplementedError();
+		return dateEmprunt;
 	}
 
 	/**
 	 * 
-	 * @return la date de retour, absente si l'emprunt n'est pas révolu
+	 * @return la date de retour, optionnalle si l'emprunt n'est pas révolu
 	 */
 	public Optional<LocalDate> getDateRetour() {
-		// TODO
-		throw new NotImplementedError();
+		return dateRetour;
 	}
 
 	/**
@@ -55,8 +59,7 @@ public class Emprunt {
 	 * @return la date limite de retour (dépend de l'ouvrage)
 	 */
 	public Optional<LocalDate> getDateLimite() {
-		// TODO
-		throw new NotImplementedError();
+		return ouvrage.getDureeMax().map(d -> dateEmprunt.plusDays(d));
 	}
 
 	/**
@@ -69,30 +72,33 @@ public class Emprunt {
 	 *             si la date de retour est antérieure à la date de l'emprunt
 	 */
 	public void setDateRetour(LocalDate dateRetour) {
-		// TODO
-		throw new NotImplementedError();
+		if (this.dateRetour.isPresent()) {
+			throw new IllegalStateException("La date de retour est déjà définie");
+		}
+		if (this.dateEmprunt.compareTo(dateRetour) > 0) {
+			throw new IllegalArgumentException("La date de retour ne peut être antérieure à la date de l'emprunt");
+		}
+		this.dateRetour = Optional.of(dateRetour);
 	}
 
 	/**
 	 * @return le lecteur ayant réalisé l'emprunt
 	 */
 	public Lecteur getLecteur() {
-		// TODO
-		throw new NotImplementedError();
+		return lecteur;
 	}
 
 	/**
 	 * @return l'ouvrage emprunté
 	 */
 	public Ouvrage getOuvrage() {
-		// TODO
-		throw new NotImplementedError();
+		return ouvrage;
 	}
 
 	@Override
 	public String toString() {
-		// TODO
-		throw new NotImplementedError();
+		return "Emprunt [dateEmprunt=" + dateEmprunt + ", dateRetour=" + dateRetour + ", lecteur=" + lecteur
+				+ ", ouvrage=" + ouvrage + "]";
 	}
 
 }

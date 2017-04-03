@@ -17,8 +17,6 @@ public class EtudiantLicence extends Lecteur {
 	 * @param nom
 	 */
 	public EtudiantLicence(String nom) {
-		super(nom, 0, 0);
-		// TODO
-		throw new NotImplementedError();
+		super(nom, 8, 14);
 	}
 }

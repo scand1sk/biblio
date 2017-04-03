@@ -1,12 +1,9 @@
 package bibliotheque;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Permet de représenter une bibliothèque modélisée par :
@@ -22,19 +19,15 @@ import java.util.stream.Collectors;
  * 
  */
 public class Bibliotheque {
-	private final Set<Lecteur> lecteurs;
-	private final Set<Emprunt> actifs;
-	private final Set<Emprunt> revolus;
-	private final Set<Ouvrage> ouvrages;
 
+	
+	
 	/**
 	 * Construit une bibliothèque
 	 */
 	public Bibliotheque() {
-		lecteurs = new HashSet<>();
-		actifs = new HashSet<>();
-		revolus = new HashSet<>();
-		ouvrages = new HashSet<>();
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -53,20 +46,8 @@ public class Bibliotheque {
 	 *             lecteur a déjà atteint sa limite d'emprunts.
 	 */
 	public Emprunt emprunter(LocalDate date, Lecteur l, Ouvrage o) throws EmpruntIncorrectException {
-		if (!lecteurs.contains(l)) {
-			throw new EmpruntIncorrectException("Le lecteur " + l + " n'est pas inscrit");
-		}
-		if (!ouvrages.contains(o)) {
-			throw new EmpruntIncorrectException("L'ouvrage " + o + " n'est pas référencé");
-		}
-
-		Emprunt e = new Emprunt(date, l, o);
-
-		o.setEmpruntActif(e);
-		l.addEmpruntActif(e);
-		actifs.add(e);
-
-		return e;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -84,7 +65,8 @@ public class Bibliotheque {
 	 *             lecteur a déjà atteint sa limite d'emprunts.
 	 */
 	public Emprunt emprunter(Lecteur l, Ouvrage o) throws EmpruntIncorrectException {
-		return emprunter(LocalDate.now(), l, o);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -97,11 +79,8 @@ public class Bibliotheque {
 	 *             objets concernés.
 	 */
 	public void rendre(Emprunt e) throws EmpruntIncorrectException {
-		e.setDateRetour(LocalDate.now());
-		e.getLecteur().rendre(e);
-		e.getOuvrage().rendre();
-		actifs.remove(e);
-		revolus.add(e);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -111,7 +90,8 @@ public class Bibliotheque {
 	 * @param l
 	 */
 	public void inscrire(Lecteur l) {
-		lecteurs.add(l);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -124,14 +104,8 @@ public class Bibliotheque {
 	 *             s'il existe un ouvrage référencé portant la même référence
 	 */
 	public void referencer(Ouvrage ouvrage) {
-		if (ouvrage.isEmprunte()) {
-			throw new IllegalStateException(
-					"L'ouvrage " + ouvrage + " est emprunté : " + ouvrage.getEmpruntActif().get());
-		}
-		if (ouvrages.stream().anyMatch(o -> o.getRef() == ouvrage.getRef())) {
-			throw new IllegalArgumentException("L'ouvrage " + ouvrage + " a une référence déjà existante");
-		}
-		ouvrages.add(ouvrage);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -141,11 +115,8 @@ public class Bibliotheque {
 	 * @param o
 	 */
 	public void dereferencer(Ouvrage o) {
-		if (o.isEmprunte()) {
-			throw new IllegalStateException("L'ouvrage " + o + " est emprunté : " + o.getEmpruntActif().get());
-		}
-		ouvrages.remove(o);
-
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -156,7 +127,8 @@ public class Bibliotheque {
 	 *         l'argument.
 	 */
 	public List<Lecteur> rechercherLecteur(String nom) {
-		return lecteurs.stream().filter(l -> l.getNom().equals(nom)).collect(Collectors.toList());
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -167,16 +139,16 @@ public class Bibliotheque {
 	 *         aucun).
 	 */
 	public Optional<Ouvrage> rechercherOuvrage(int ref) {
-		return ouvrages.stream().filter(o -> o.getRef() == ref).findAny();
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
 	 * @return la liste des emprunts en retard
 	 */
 	public List<Emprunt> retards() {
-		LocalDate now = LocalDate.now();
-		return actifs.stream().filter(e -> e.getDateLimite().isPresent() && e.getDateLimite().get().compareTo(now) < 0)
-				.collect(Collectors.toList());
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -184,7 +156,8 @@ public class Bibliotheque {
 	 * @return l'ensemble des lecteurs inscrits
 	 */
 	public Set<Lecteur> getLecteurs() {
-		return Collections.unmodifiableSet(lecteurs);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -192,7 +165,8 @@ public class Bibliotheque {
 	 * @return l'ensemble des emprunts actifs
 	 */
 	public Set<Emprunt> getActifs() {
-		return Collections.unmodifiableSet(actifs);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -200,7 +174,8 @@ public class Bibliotheque {
 	 * @return l'ensemble des emprunts révolus
 	 */
 	public Set<Emprunt> getRevolus() {
-		return Collections.unmodifiableSet(revolus);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -208,7 +183,8 @@ public class Bibliotheque {
 	 * @return l'ensemble des ouvrages référencés
 	 */
 	public Set<Ouvrage> getOuvrages() {
-		return Collections.unmodifiableSet(ouvrages);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 }

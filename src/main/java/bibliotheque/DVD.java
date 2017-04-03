@@ -12,8 +12,6 @@ import java.util.Optional;
  */
 public class DVD extends Ouvrage {
 
-	private final String real;
-
 	/**
 	 * Construit un DVD
 	 * 
@@ -23,12 +21,14 @@ public class DVD extends Ouvrage {
 	 */
 	public DVD(String titre, int ref, String real) {
 		super(titre, ref);
-		this.real = real;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	@Override
 	public Optional<Integer> getDureeMax() {
-		return Optional.of(7);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -36,12 +36,14 @@ public class DVD extends Ouvrage {
 	 * @return le nom du réalisateur
 	 */
 	public String getReal() {
-		return real;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	@Override
 	public String toString() {
-		return "DVD [real=" + real + ", toString()=" + super.toString() + "]";
+		// TODO
+		throw new NotImplementedError();
 	}
 
 }

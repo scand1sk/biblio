@@ -1,7 +1,5 @@
 package bibliotheque;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Optional;
 import java.util.Set;
 
@@ -9,10 +7,6 @@ import java.util.Set;
  * Représente un ouvrage pouvant être emprunté à la bibliothèque
  */
 public abstract class Ouvrage {
-	private final String titre;
-	private final int ref;
-	private Optional<Emprunt> empruntActif;
-	private Set<Emprunt> empruntsRevolus;
 
 	/**
 	 * Construit un ouvrage avec le titre et la référence indiqués
@@ -22,10 +16,8 @@ public abstract class Ouvrage {
 	 */
 	public Ouvrage(String titre, int ref) {
 		super();
-		this.titre = titre;
-		this.ref = ref;
-		this.empruntActif = Optional.empty();
-		this.empruntsRevolus = new HashSet<>();
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -38,15 +30,8 @@ public abstract class Ouvrage {
 	 * @param emprunt
 	 */
 	public void setEmpruntActif(Emprunt emprunt) throws EmpruntIncorrectException {
-		if (empruntActif.isPresent()) {
-			throw new EmpruntIncorrectException("L'ouvrage " + this + " est déjà emprunté : " + empruntActif.get());
-		}
-		if (emprunt.getOuvrage() != this) {
-			throw new EmpruntIncorrectException(
-					"L'ouvrage de l'emprunt " + emprunt + " ne correspond pas à l'ouvrage " + this);
-		}
-
-		this.empruntActif = Optional.of(emprunt);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -57,20 +42,16 @@ public abstract class Ouvrage {
 	 *             de l'emprunt n'a pas été définie
 	 */
 	public void rendre() throws EmpruntIncorrectException {
-		empruntActif.orElseThrow(() -> new EmpruntIncorrectException("L'ouvrage " + this + " n'est pas emprunté"));
-		Emprunt e = empruntActif.get();
-		if (!e.getDateRetour().isPresent()) {
-			throw new EmpruntIncorrectException("Veuillez d'abord définir la date de rendu de l'emprunt " + e);
-		}
-		empruntsRevolus.add(e);
-		empruntActif = Optional.empty();
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
 	 * @return l'emprunt actif s'il existe
 	 */
 	public Optional<Emprunt> getEmpruntActif() {
-		return empruntActif;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -78,21 +59,24 @@ public abstract class Ouvrage {
 	 * @return l'ensemble des emprunts révolus
 	 */
 	public Set<Emprunt> getEmpruntsRevolus() {
-		return Collections.unmodifiableSet(empruntsRevolus);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
 	 * @return le titre de l'ouvrage
 	 */
 	public String getTitre() {
-		return titre;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
 	 * @return la référence de l'ouvrage
 	 */
 	public int getRef() {
-		return ref;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -100,7 +84,8 @@ public abstract class Ouvrage {
 	 *         actif)
 	 */
 	public boolean isEmprunte() {
-		return empruntActif.isPresent();
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -111,8 +96,8 @@ public abstract class Ouvrage {
 
 	@Override
 	public String toString() {
-		return "Ouvrage [titre=" + titre + ", ref=" + ref + ", isEmprunte()=" + isEmprunte() + ", getDureeMax()="
-				+ getDureeMax() + "]";
+		// TODO
+		throw new NotImplementedError();
 	}
 
 }

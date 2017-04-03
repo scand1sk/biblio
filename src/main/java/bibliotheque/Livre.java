@@ -12,7 +12,6 @@ import java.util.Optional;
  */
 public class Livre extends Ouvrage {
 
-	private final String auteur;
 
 	/**
 	 * Construit un livre
@@ -23,24 +22,28 @@ public class Livre extends Ouvrage {
 	 */
 	public Livre(String titre, int ref, String auteur) {
 		super(titre, ref);
-		this.auteur = auteur;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	@Override
 	public Optional<Integer> getDureeMax() {
-		return Optional.empty();
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
 	 * @return l'auteur du livre
 	 */
 	public String getAuteur() {
-		return auteur;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	@Override
 	public String toString() {
-		return "Livre [auteur=" + auteur + ", toString()=" + super.toString() + "]";
+		// TODO
+		throw new NotImplementedError();
 	}
 
 }

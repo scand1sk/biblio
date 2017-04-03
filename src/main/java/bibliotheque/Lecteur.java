@@ -1,21 +1,11 @@
 package bibliotheque;
 
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 /**
  * Permet de représenter un lecteur
  */
 public class Lecteur {
-
-	private String nom;
-	private int nbMaxOuvrage;
-	private int dureeMaxEmprunt;
-
-	private Set<Emprunt> actifs;
-	private Set<Emprunt> revolus;
-
 	/**
 	 * Construit un lecteur, en indiquant son nom
 	 * 
@@ -25,11 +15,8 @@ public class Lecteur {
 	 */
 	public Lecteur(String nom, int nbMaxOuvrage, int dureeMaxEmprunt) {
 		super();
-		this.nom = nom;
-		this.nbMaxOuvrage = nbMaxOuvrage;
-		this.dureeMaxEmprunt = dureeMaxEmprunt;
-		actifs = new HashSet<>();
-		revolus = new HashSet<>();
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -38,14 +25,8 @@ public class Lecteur {
 	 * @param e
 	 */
 	public void addEmpruntActif(Emprunt e) throws EmpruntIncorrectException {
-		if (nbMaxOuvrage == actifs.size()) {
-			throw new EmpruntIncorrectException("Le lecteur " + this + " a déjà atteint sa limite d'emprunt");
-		}
-		if (e.getLecteur() != this) {
-			throw new EmpruntIncorrectException(
-					"Le lecteur de l'emprunt " + e + " ne correspond pas au lecteur " + this);
-		}
-		actifs.add(e);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	/**
@@ -57,40 +38,39 @@ public class Lecteur {
 	 *             si l'emprunt n'a pas de date de retour définie
 	 */
 	public void rendre(Emprunt e) throws EmpruntIncorrectException {
-		if (!e.getDateRetour().isPresent()) {
-			throw new EmpruntIncorrectException("Veuillez d'abord définir une date de retour pour l'emprunt " + e);
-		}
-		boolean removed = actifs.remove(e);
-		if (!removed) {
-			throw new EmpruntIncorrectException(
-					"L'emprunt " + e + " n'est pas dans la liste des emprunts actifs de " + this);
-		}
-		revolus.add(e);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	@Override
 	public String toString() {
-		return "Lecteur [nom=" + nom + "]";
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	public String getNom() {
-		return nom;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	public int getNbMaxOuvrage() {
-		return nbMaxOuvrage;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	public int getDureeMaxEmprunt() {
-		return dureeMaxEmprunt;
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	public Set<Emprunt> getActifs() {
-		return Collections.unmodifiableSet(actifs);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 	public Set<Emprunt> getRevolus() {
-		return Collections.unmodifiableSet(revolus);
+		// TODO
+		throw new NotImplementedError();
 	}
 
 }

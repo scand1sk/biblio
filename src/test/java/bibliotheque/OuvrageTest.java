@@ -18,18 +18,28 @@ import org.junit.Test;
 public class OuvrageTest {
 
 	private DVD dvd;
-	private Lecteur l;
-	private Emprunt e;
 
 	@Before
 	public void setUp() throws Exception {
 		dvd = new DVD("Film de Toto", 123, "Philippe");
-		l = new EtudiantLicence("Jean");
-		e = new Emprunt(l, dvd);
+	}
+
+	private Lecteur lecteurTest() {
+		return new EtudiantLicence("Jean");
+	}
+
+	private Emprunt empruntTest(Lecteur l) {
+		return new Emprunt(l, dvd);
+	}
+
+	private Emprunt empruntTest() {
+		return empruntTest(lecteurTest());
+
 	}
 
 	@Test
 	public void empruntNominal() throws EmpruntIncorrectException {
+		Emprunt e = empruntTest();
 		assertFalse(dvd.isEmprunte());
 		assertThat(dvd.getEmpruntActif(), isEmpty());
 
@@ -51,6 +61,8 @@ public class OuvrageTest {
 
 	@Test(expected = EmpruntIncorrectException.class)
 	public void setEmpruntActifDouble() throws EmpruntIncorrectException {
+		Lecteur l = lecteurTest();
+		Emprunt e = empruntTest(l);
 		dvd.setEmpruntActif(e);
 
 		Emprunt e2 = new Emprunt(l, dvd);
@@ -59,6 +71,7 @@ public class OuvrageTest {
 
 	@Test(expected = EmpruntIncorrectException.class)
 	public void setEmpruntActifIncorrect() throws EmpruntIncorrectException {
+		Lecteur l = lecteurTest();
 		Ouvrage o = new DVD("Histoire de Titi", 456, "Vincent");
 		Emprunt e1 = new Emprunt(l, o);
 
@@ -72,12 +85,14 @@ public class OuvrageTest {
 
 	@Test(expected = EmpruntIncorrectException.class)
 	public void testRendrePasDeDate() throws EmpruntIncorrectException {
+		Emprunt e = empruntTest();
 		dvd.setEmpruntActif(e);
 		dvd.rendre();
 	}
 
 	@Test
 	public void testSecuriteRevolus() {
+		Emprunt e = empruntTest();
 		try {
 			Set<Emprunt> revolus = dvd.getEmpruntsRevolus();
 			revolus.add(e);

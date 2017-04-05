@@ -15,19 +15,29 @@ import org.junit.Test;
 
 public class LecteurTest {
 
-	private DVD dvd;
 	private Lecteur l;
-	private Emprunt e;
 
 	@Before
 	public void setUp() throws Exception {
-		dvd = new DVD("Film de Toto", 123, "Philippe");
 		l = new EtudiantLicence("Jean");
-		e = new Emprunt(l, dvd);
+	}
+
+	private DVD dvdTest() {
+		return new DVD("Film de Toto", 123, "Philippe");
+	}
+
+	private Emprunt empruntTest(DVD dvd) {
+		return new Emprunt(l, dvd);
+	}
+
+	private Emprunt empruntTest() {
+		return empruntTest(dvdTest());
+
 	}
 
 	@Test
 	public void empruntNominal() throws EmpruntIncorrectException {
+		Emprunt e = empruntTest();
 		assertThat(l.getActifs(), empty());
 		assertThat(l.getRevolus(), empty());
 
@@ -58,23 +68,28 @@ public class LecteurTest {
 	@Test(expected = EmpruntIncorrectException.class)
 	public void empruntIncorrect() throws EmpruntIncorrectException {
 		Lecteur l2 = new EtudiantLicence("Jacques");
+		DVD dvd = dvdTest();
 		Emprunt e2 = new Emprunt(l2, dvd);
+		// Ajout un emprunt du lecteur l2 au lecteur l
 		l.addEmpruntActif(e2);
 	}
 
 	@Test(expected = EmpruntIncorrectException.class)
 	public void rendreSansDate() throws EmpruntIncorrectException {
+		Emprunt e = empruntTest();
 		l.addEmpruntActif(e);
 		l.rendre(e);
 	}
 
 	@Test(expected = EmpruntIncorrectException.class)
 	public void rendreInactif() throws EmpruntIncorrectException {
+		Emprunt e = empruntTest();
 		l.rendre(e);
 	}
 
 	@Test
 	public void testSecurite() {
+		Emprunt e = empruntTest();
 		try {
 			Set<Emprunt> revolus = l.getRevolus();
 			revolus.add(e);
@@ -90,12 +105,10 @@ public class LecteurTest {
 			// OK
 		}
 	}
-	
+
 	@Test
 	public void getNomTest() {
 		assertThat(l.getNom(), equalTo("Jean"));
 	}
-	
-
 
 }
